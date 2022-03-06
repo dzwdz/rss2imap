@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  dovecot:
+    build: dovecot
+    ports:
+      - "1443:143"
+    volumes:
+      - ./data/mail:/srv/mail
+      - ./dovecot:/etc/dovecot:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  authd:
+    build: authd
+    ports:
+      - "1234:1234"
